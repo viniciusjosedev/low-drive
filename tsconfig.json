@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./build",
     "target": "ES2022",
     "module": "CommonJS",
@@ -17,6 +17,5 @@
     "skipLibCheck": true,
 		"noImplicitAny": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules, tests"]
+	"include": ["src"]
 }
