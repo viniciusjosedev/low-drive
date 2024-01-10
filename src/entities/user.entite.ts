@@ -26,6 +26,6 @@ export default class User {
 		Object.assign(this, props)
 	}
 
-		
+			
 
 }
