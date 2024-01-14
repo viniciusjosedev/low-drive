@@ -98,7 +98,7 @@ describe("UserEntity", () => {
     } catch (error) {
       expect(error).toBeInstanceOf(LowDriveError);
       expect(error).toHaveProperty("message", "Insufficient storage!");
-      expect(error).toHaveProperty("message", "Insufficient storage!");
+      expect(error).toHaveProperty("statusCode", 400);
     }
   });
 });
