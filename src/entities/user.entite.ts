@@ -1,17 +1,10 @@
-type FileInterface = {
-	name: string;
-	mimeType: string;
-	type: string;
-	size: number;
-};
-
-type UserInterface = {
+export interface UserInterface {
 	name: string;
 	email: string;
 	password: string;
 	token: string;
 	storage: number;
-};
+}
 
 export default class User {
   private _name: string;
@@ -20,7 +13,12 @@ export default class User {
   private _token: string;
   private _storage: number;
 
-  constructor({name, email, password, token, storage}: UserInterface) {
+  constructor({ 
+    name,
+    email, 
+    password, 
+    token, 
+    storage }: UserInterface) {
     this._name = name;
     this._email = email;
     this._password = password;
