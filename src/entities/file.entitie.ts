@@ -1,7 +1,7 @@
 import LowDriveError from "../utils/lowDriveError";
 import User from "./user.entite";
 
-interface File {
+interface Ifile {
 	name: string;
 	mimeType: string;
 	type: string;
@@ -9,20 +9,20 @@ interface File {
 }
 
 interface FileInterface {
-	files: File[]
+	files: Ifile[]
 	user: User
 }
 
-export default class Files {
+export default class File {
   private _user: User;
-  private _files: File[];
+  private _files: Ifile[];
 
   constructor({ files, user }: FileInterface) {
     this._files = files;
     this._user = user;
   }
 
-  public get files(): File[] {
+  public get files(): Ifile[] {
     return this._files;
   }
 
@@ -46,7 +46,7 @@ export default class Files {
     };
   }
 
-  public create(file: File) {
+  public create(file: Ifile) {
     const { haveSize, newSize } = this.isPossibleAddFile(file.size);
 
     if (!haveSize) {

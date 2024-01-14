@@ -1,5 +1,5 @@
 import LowDriveError from "../utils/lowDriveError";
-import Files from "./files.entitie";
+import File from "./file.entitie";
 import User from "./user.entite";
 
 const mockUserObj = {
@@ -18,7 +18,7 @@ describe("UserEntity", () => {
     };
 		
 
-    const filesInstance = new Files(mockFileObj);
+    const filesInstance = new File(mockFileObj);
 
     expect(filesInstance).toBeDefined();
   });
@@ -30,7 +30,7 @@ describe("UserEntity", () => {
     };
 		
 
-    const filesInstance = new Files(mockFileObj);		
+    const filesInstance = new File(mockFileObj);		
 
     expect({
       user: {
@@ -54,7 +54,7 @@ describe("UserEntity", () => {
     };
 		
 
-    const filesInstance = new Files(mockFileObj);
+    const filesInstance = new File(mockFileObj);
 
     expect(filesInstance.get()).toStrictEqual(mockFileObj);
 
@@ -82,7 +82,7 @@ describe("UserEntity", () => {
     };
 		
 
-    const filesInstance = new Files(mockFileObj);
+    const filesInstance = new File(mockFileObj);
 
     const objCreate = {
       mimeType: "audio/mp3",
