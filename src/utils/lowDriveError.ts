@@ -19,7 +19,7 @@ export default class LowDriveError {
     return this._message;
   }
 
-  public get code() {
+  public get statusCode() {
     return this._statusCode;
   }
 
