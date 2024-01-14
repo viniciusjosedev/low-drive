@@ -10,38 +10,38 @@ const mockUserObj = {
 
 describe("UserEntity", () => {
   it("should be instantiated", () => {
-    const user = new User(mockUserObj);
+    const userInstance = new User(mockUserObj);
 
-    expect(user).toBeDefined();
+    expect(userInstance).toBeDefined();
   });
 
   it("should have the right attributes", () => {
-    const user = new User(mockUserObj);
+    const userInstance = new User(mockUserObj);
 
     expect({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      storage: user.storage,
-      token: user.token,
+      name: userInstance.name,
+      email: userInstance.email,
+      password: userInstance.password,
+      storage: userInstance.storage,
+      token: userInstance.token,
     }).toStrictEqual(mockUserObj);
   });
 
   it("should have the right methods", () => {
-    const user = new User(mockUserObj);
+    const userInstance = new User(mockUserObj);
 
-    expect(user.get()).toStrictEqual(mockUserObj);
+    expect(userInstance.get()).toStrictEqual(mockUserObj);
 
     const objUpdate = {
       name: "test",
       email: "test@vinicorp.com",
       password: "admin@test",
-      storage: 10,
+      storage: 50,
       token: "ASDF",
     };
 
-    user.update(objUpdate);
+    userInstance.update(objUpdate);
 
-    expect(user.get()).toStrictEqual(objUpdate);
+    expect(userInstance.get()).toStrictEqual(objUpdate);
   });
 });
