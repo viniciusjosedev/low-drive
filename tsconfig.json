@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./build",
-    "target": "ES6",
+    "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -18,5 +18,5 @@
 		"noImplicitAny": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules, tests"]
+  "exclude": ["node_modules"]
 }
