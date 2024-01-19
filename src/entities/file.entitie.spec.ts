@@ -1,6 +1,9 @@
 import LowDriveError from "../utils/lowDriveError";
-import File from "./file.entitie";
+import File, { Ifile } from "./file.entitie";
 import User from "./user.entite";
+
+const NUMBER_10240 = 10240;
+const NUMBER_10241 = 10241;
 
 const mockUserObj = {
   name: "Vinicius",
@@ -10,28 +13,31 @@ const mockUserObj = {
   token: "TOKEN",
 };
 
+
+
 describe("UserEntity", () => {
-  it("should be instantiated", () => {
-    const mockFileObj = {
+  let filesInstance: File;
+  let mockFileObj: {
+		user: User,
+		files: Ifile[]
+	};
+
+  beforeEach(() => {
+    mockFileObj = {
       user: new User(mockUserObj),
       files: []
     };
 		
 
-    const filesInstance = new File(mockFileObj);
+    filesInstance = new File(mockFileObj);
+  });
 
+
+  it("should be instantiated", () => {
     expect(filesInstance).toBeDefined();
   });
 
   it("should have the right attributes", () => {
-    const mockFileObj = {
-      user: new User(mockUserObj),
-      files: []
-    };
-		
-
-    const filesInstance = new File(mockFileObj);		
-
     expect({
       user: {
         name: filesInstance.user.name,
@@ -48,14 +54,6 @@ describe("UserEntity", () => {
   });
 
   it("should have the right methods", () => {
-    const mockFileObj = {
-      user: new User(mockUserObj),
-      files: []
-    };
-		
-
-    const filesInstance = new File(mockFileObj);
-
     expect(filesInstance.get()).toStrictEqual(mockFileObj);
 
     const objCreate = {
@@ -65,6 +63,11 @@ describe("UserEntity", () => {
       type: "audio"
     };
 
+    const objUpdate = {
+      ...objCreate,
+      size: 4056
+    };
+
     filesInstance.create(objCreate);
 
     expect(filesInstance.get()).toStrictEqual({
@@ -72,22 +75,31 @@ describe("UserEntity", () => {
       files: [objCreate]
     });
 
+
+    filesInstance.update(objUpdate);
+
+    expect(filesInstance.get()).toStrictEqual({
+      user: filesInstance.user,
+      files: [objUpdate]
+    });
+
     expect(filesInstance.get().files).toHaveLength(1);
+
+    filesInstance.delete(objUpdate.name);
+
+    expect(filesInstance.get()).toStrictEqual({
+      user: filesInstance.user,
+      files: []
+    });
+
+    expect(filesInstance.get().files).toHaveLength(0);
   });
 
-  it("should give an error if it exceeds the storage", () => {
-    const mockFileObj = {
-      user: new User(mockUserObj),
-      files: []
-    };
-		
-
-    const filesInstance = new File(mockFileObj);
-
+  it("should give an error if it exceeds storage when creating", () => {
     const objCreate = {
       mimeType: "audio/mp3",
       name: "low-drive is the best",
-      size: 10.241,
+      size: NUMBER_10241,
       type: "audio"
     };
 
@@ -99,6 +111,45 @@ describe("UserEntity", () => {
       expect(error).toBeInstanceOf(LowDriveError);
       expect(error).toHaveProperty("message", "Insufficient storage!");
       expect(error).toHaveProperty("statusCode", 400);
+    }
+  });
+
+  it("should give an error if it exceeds storage when updating", () => {
+    const objCreate = {
+      mimeType: "audio/mp3",
+      name: "low-drive is the best",
+      size: NUMBER_10240,
+      type: "audio"
+    };
+
+    const objUpdate = {
+      ...objCreate,
+      size: NUMBER_10241
+    };
+
+    filesInstance.create(objCreate);
+
+
+    try {
+      filesInstance.update(objUpdate);
+      // Fail test if above expression doesn't throw anything.
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error).toBeInstanceOf(LowDriveError);
+      expect(error).toHaveProperty("message", "Insufficient storage!");
+      expect(error).toHaveProperty("statusCode", 400);
+    }
+  });
+
+  it("It should give an error if it can't find the file to delete", () => {
+    try {
+      filesInstance.delete("File not exist");
+      // Fail test if above expression doesn't throw anything.
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error).toBeInstanceOf(LowDriveError);
+      expect(error).toHaveProperty("message", "File not found!");
+      expect(error).toHaveProperty("statusCode", 404);
     }
   });
 });
