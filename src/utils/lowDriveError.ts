@@ -23,10 +23,4 @@ export default class LowDriveError {
     return this._statusCode;
   }
 
-  public static insufficientStorage() {
-    throw new LowDriveError({
-      message: "Insufficient storage!",
-      statusCode: 400
-    });
-  }
 }
