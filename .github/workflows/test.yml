@@ -16,10 +16,19 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '16'  # Use a versão do Node.js compatível com o seu projeto
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    - name: Run tests and collect coverage
+      run: |
+        npm test -- --coverage
+        echo "Coverage threshold check..."
+        coverage=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
+        if (( $(echo "$coverage < 100" | bc -l) )); then
+          echo "Coverage is below 100%: $coverage%"
+          exit 1  # Faz com que a action falhe
+        else
+          echo "Coverage is 100%"
+        fi
