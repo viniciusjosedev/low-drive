@@ -1,7 +1,8 @@
+import messagesError from "../utils/messagesError";
 import LowDriveError from "../utils/lowDriveError";
 import User from "./user.entite";
 
-interface Ifile {
+export interface Ifile {
 	name: string;
 	mimeType: string;
 	type: string;
@@ -30,10 +31,23 @@ export default class File {
     return this._user;
   }
 
-  public get(): FileInterface {
+  private findFileByName(name: string) {
+    let fileIndex: number | undefined;
+
+    const findFile = this._files.find((file, index) => {
+      if (file.name === name) {
+        fileIndex = index;
+        return true;
+      }
+    });
+
+    if (!findFile) {
+      throw new LowDriveError(messagesError.fileNotFound);
+    }
+
     return {
-      files: this._files,
-      user: this._user
+      file: findFile,
+      fileIndex: fileIndex as number
     };
   }
 
@@ -41,8 +55,27 @@ export default class File {
     const newSize = this._user.storage + size;				
 
     return {
-      haveSize: newSize <= 10.240,
+      haveSize: newSize <= 10240,
       newSize
+    };
+  }
+
+  private isPossibleAttFile(name: string, size: number) {
+    const { file: findFile, fileIndex } = this.findFileByName(name);
+
+    const newSize = (this._user.storage - findFile.size) + size;
+
+    return {
+      haveSize: newSize <= 10240,
+      newSize,
+      fileIndex
+    };
+  }
+
+  public get(): FileInterface {
+    return {
+      files: this._files,
+      user: this._user
     };
   }
 
@@ -50,7 +83,7 @@ export default class File {
     const { haveSize, newSize } = this.isPossibleAddFile(file.size);
 
     if (!haveSize) {
-      LowDriveError.insufficientStorage();
+      throw new LowDriveError(messagesError.insufficientStorage);
     }
 
     this._files.push(file);
@@ -59,4 +92,31 @@ export default class File {
     });
   }
 
+  public update(file: Ifile) {
+    const { haveSize, newSize, fileIndex } = this.isPossibleAttFile(file.name, file.size);
+	
+    if (!haveSize){
+      throw new LowDriveError(messagesError.insufficientStorage);
+    }
+		
+    if (typeof fileIndex === "number") {
+      this._files[fileIndex].size = newSize;
+      this._user.update({
+        storage: newSize
+      });
+    }
+
+  }
+
+  public delete(name: string) {
+    const { file: findFile, fileIndex } = this.findFileByName(name);
+
+    const newStorage = this._user.storage - findFile.size;
+
+    this._user.update({
+      storage: newStorage
+    });
+
+    this._files.splice(fileIndex, 1);
+  }
 }
