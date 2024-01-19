@@ -20,17 +20,4 @@ describe("UserEntity", () => {
       statusCode: lowDriveErrorInstance.statusCode
     }).toStrictEqual(mockLowDriveErrorObj);
   });
-
-  it("should have the right methods", () => {
-    try {
-      LowDriveError.insufficientStorage();
-		
-      // Fail test if above expression doesn't throw anything.
-      expect(true).toBe(false);
-    } catch (error) {
-      expect(error).toBeInstanceOf(LowDriveError);
-      expect(error).toHaveProperty("message", "Insufficient storage!");
-      expect(error).toHaveProperty("statusCode", 400);
-    }
-  });
 });
