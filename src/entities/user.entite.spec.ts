@@ -9,15 +9,17 @@ const mockUserObj = {
 };
 
 describe("UserEntity", () => {
-  it("should be instantiated", () => {
-    const userInstance = new User(mockUserObj);
+  let userInstance: User;
+	
+  beforeEach(() => {
+    userInstance = new User(mockUserObj);
+  });
 
+  it("should be instantiated", () => {
     expect(userInstance).toBeDefined();
   });
 
   it("should have the right attributes", () => {
-    const userInstance = new User(mockUserObj);
-
     expect({
       name: userInstance.name,
       email: userInstance.email,
@@ -28,8 +30,6 @@ describe("UserEntity", () => {
   });
 
   it("should have the right methods", () => {
-    const userInstance = new User(mockUserObj);
-
     expect(userInstance.get()).toStrictEqual(mockUserObj);
 
     const objUpdate = {
