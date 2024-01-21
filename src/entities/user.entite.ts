@@ -1,10 +1,4 @@
-export interface UserInterface {
-	name: string;
-	email: string;
-	password: string;
-	token: string;
-	storage: number;
-}
+import { UserInput, UserOutput } from "../interfaces/user.entitie.interface";
 
 export default class User {
   private _name: string;
@@ -18,7 +12,7 @@ export default class User {
     email, 
     password, 
     token, 
-    storage }: UserInterface) {
+    storage }: UserInput) {
     this._name = name;
     this._email = email;
     this._password = password;
@@ -52,7 +46,7 @@ export default class User {
     password,
     storage,
     token
-  }: Partial<UserInterface>) {
+  }: Partial<UserInput>) {
     if (name) {
       this._name = name;
     } if (email) {
@@ -66,7 +60,7 @@ export default class User {
     }
   }
 
-  public get(): UserInterface {
+  public get(): UserOutput {
     return {
       name: this._name,
       email: this._email,
