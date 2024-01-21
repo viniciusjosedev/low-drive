@@ -6,7 +6,6 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "baseUrl": "./",
     "typeRoots": [
       "src/@types",
       "./node_modules/@types"
