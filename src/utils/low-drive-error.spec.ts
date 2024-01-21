@@ -1,4 +1,4 @@
-import LowDriveError from "./lowDriveError";
+import LowDriveError from "./low-drive-error";
 
 const mockLowDriveErrorObj  = {
   message: "Error",
