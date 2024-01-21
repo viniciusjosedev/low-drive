@@ -1,24 +1,12 @@
-import messagesError from "../utils/messagesError";
-import LowDriveError from "../utils/lowDriveError";
+import messagesError from "../utils/messages-error";
+import LowDriveError from "../utils/low-drive-error";
 import User from "./user.entite";
-
-export interface Ifile {
-	name: string;
-	mimeType: string;
-	type: string;
-	size: number;
-}
-
-interface FileInterface {
-	files: Ifile[]
-	user: User
-}
-
+import { FileInput, FileOutput, Ifile } from "../interfaces/file.entitie.interface";
 export default class File {
   private _user: User;
   private _files: Ifile[];
 
-  constructor({ files, user }: FileInterface) {
+  constructor({ files, user }: FileInput) {
     this._files = files;
     this._user = user;
   }
@@ -72,7 +60,7 @@ export default class File {
     };
   }
 
-  public get(): FileInterface {
+  public get(): FileOutput {
     return {
       files: this._files,
       user: this._user

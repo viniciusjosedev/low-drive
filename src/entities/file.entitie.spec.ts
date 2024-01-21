@@ -1,4 +1,4 @@
-import LowDriveError from "../utils/lowDriveError";
+import LowDriveError from "../utils/low-drive-error";
 import File, { Ifile } from "./file.entitie";
 import User from "./user.entite";
 
