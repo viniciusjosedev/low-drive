@@ -1,4 +1,4 @@
-import { UserInput, UserOutput } from "../interfaces/user.entitie.interface";
+import { UserInput, UserOutput } from "../interfaces/entities/user.entity.interface";
 
 export default class User {
   private _name: string;

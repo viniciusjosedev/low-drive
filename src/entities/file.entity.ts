@@ -1,7 +1,7 @@
 import messagesError from "../utils/messages-error";
 import LowDriveError from "../utils/low-drive-error";
-import User from "./user.entite";
-import { FileInput, FileOutput, Ifile } from "../interfaces/file.entitie.interface";
+import User from "./user.entity";
+import { FileInput, FileOutput, Ifile } from "../interfaces/entities/file.entity.interface";
 export default class File {
   private _user: User;
   private _files: Ifile[];

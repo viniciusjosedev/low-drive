@@ -1,7 +1,7 @@
-import { Ifile } from "../interfaces/file.entitie.interface";
+import { Ifile } from "../interfaces/entities/file.entity.interface";
 import LowDriveError from "../utils/low-drive-error";
-import File from "./file.entitie";
-import User from "./user.entite";
+import File from "./file.entity";
+import User from "./user.entity";
 
 const NUMBER_10240 = 10240;
 const NUMBER_10241 = 10241;

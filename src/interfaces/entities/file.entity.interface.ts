@@ -1,4 +1,4 @@
-import User from "../entities/user.entite";
+import User from "../../entities/user.entity";
 
 export interface Ifile {
 	name: string;

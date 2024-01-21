@@ -1,4 +1,4 @@
-import User from "./user.entite";
+import User from "./user.entity";
 
 const mockUserObj = {
   name: "Vinicius",
