@@ -1,4 +1,4 @@
-interface LowDriveErrorInterface {
+export interface LowDriveErrorInterface {
 	message: string;
 	statusCode?: number
 }
