@@ -1,4 +1,3 @@
-import { UserOutput } from "../interfaces/entities/user.entity.interface";
 import { UserPersistenceInput, UserPersistenceOutput } from "../interfaces/entities/user.persistence.entity.interface";
 import User from "./user.entity";
 
@@ -29,12 +28,14 @@ export default class UserPersistence {
   }
 
   public get user(): User {
-    return this.user;
+    return this._user;
   }
 
   public get(): UserPersistenceOutput {
+    const userOutput = this._user.get();
+
     return {
-      ...this._user.get(),
+      ...userOutput,
       createdAt: this._createdAt,
       updatedAt: this._updatedAt
     };
