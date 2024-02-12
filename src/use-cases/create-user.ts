@@ -1,9 +1,23 @@
-import User from "../entities/user.entite";
-import { UserInput, UserOutput } from "../interfaces/user.entitie.interface";
+import User from "../entities/user.entity";
+import { UserInput, UserOutput } from "../interfaces/entities/user.entity.interface";
+import UserRepositoryImpl from "../repositories/user.repository";
+import LowDriveError from "../entities/errors/low-drive-error";
+import messagesError from "../entities/errors/messages-error";
 
 export default class createUserUseCase {
-  async execute(input: UserInput): Promise<UserOutput> {
-    const user = new User(input);
-    return user.get();
+  private _repository: UserRepositoryImpl;
+
+  constructor(repository: UserRepositoryImpl) {
+    this._repository = repository;
+  }
+
+  async execute(input: UserInput): Promise<UserOutput | void> {
+    try {
+      const user = new User(input);
+      await this._repository.create(user);
+      return user.get();
+    } catch (error) {
+      throw new LowDriveError(messagesError.internalServer);
+    }
   }
 }
