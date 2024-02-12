@@ -1,5 +1,5 @@
 import { Ifile } from "../interfaces/entities/file.entity.interface";
-import LowDriveError from "./errors/low-drive-error";
+import LowDriveError from "../errors/low-drive-error";
 import File from "./file.entity";
 import User from "./user.entity";
 

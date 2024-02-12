@@ -1,5 +1,5 @@
-import messagesError from "./errors/messages-error";
-import LowDriveError from "./errors/low-drive-error";
+import messagesError from "../errors/messages-error";
+import LowDriveError from "../errors/low-drive-error";
 import User from "./user.entity";
 import { FileInput, FileOutput, Ifile } from "../interfaces/entities/file.entity.interface";
 export default class File {

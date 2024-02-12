@@ -1,8 +1,8 @@
 import User from "../entities/user.entity";
 import { UserInput, UserOutput } from "../interfaces/entities/user.entity.interface";
 import UserRepositoryImpl from "../repositories/user.repository";
-import LowDriveError from "../entities/errors/low-drive-error";
-import messagesError from "../entities/errors/messages-error";
+import LowDriveError from "../errors/low-drive-error";
+import messagesError from "../errors/messages-error";
 
 export default class createUserUseCase {
   private _repository: UserRepositoryImpl;
