@@ -4,7 +4,7 @@ export default class User {
   private _name: string;
   private _email: string;
   private _password: string;
-  private _token: string;
+  private _token?: string | null;
   private _storage: number;
 
   constructor({ 
@@ -32,7 +32,7 @@ export default class User {
     return this._password;
   }
 
-  public get token(): string {
+  public get token(): string | undefined | null {
     return this._token;
   }
 
@@ -47,17 +47,11 @@ export default class User {
     storage,
     token
   }: Partial<UserInput>) {
-    if (name) {
-      this._name = name;
-    } if (email) {
-      this._email = email;
-    } if (password) {
-      this._password = password;
-    } if (storage) {
-      this._storage = storage;
-    } if (token) {
-      this._token = token;
-    }
+    if (name) this._name = name;
+    if (email) this._email = email;
+    if (password) this._password = password;
+    if (storage) this._storage = storage;
+    if (token) this._token = token;
   }
 
   public get(): UserOutput {
