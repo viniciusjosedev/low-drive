@@ -7,6 +7,10 @@ const mockUserObj = {
   password: "admin@vinicius",
   storage: 0,
   token: "TOKEN",
+};
+
+const mockUserPersistenceObj = {
+  user: new User(mockUserObj),
   createdAt: new Date(),
   updatedAt: new Date()
 };
@@ -14,7 +18,7 @@ describe("UserPersistenceEntity", () => {
   let userPersistenceInstance: UserPersistence;
 	
   beforeEach(() => {
-    userPersistenceInstance = new UserPersistence(mockUserObj);
+    userPersistenceInstance = new UserPersistence(mockUserPersistenceObj);
   });
 
   it("should be instantiated", () => {
@@ -23,7 +27,7 @@ describe("UserPersistenceEntity", () => {
 
   it("Should be instantiated wihout createdAt and updatedAt", () => {
     userPersistenceInstance = new UserPersistence({
-      ...mockUserObj,
+      ...mockUserPersistenceObj,
       createdAt: undefined,
       updatedAt: undefined
     });
@@ -38,7 +42,11 @@ describe("UserPersistenceEntity", () => {
   });
 
   it("should have the right methods", () => {
-    expect(userPersistenceInstance.get()).toStrictEqual(mockUserObj);
+    expect(userPersistenceInstance.get()).toStrictEqual({
+      ...mockUserObj,
+      createdAt: mockUserPersistenceObj.createdAt,
+      updatedAt: mockUserPersistenceObj.updatedAt
+    });
 
     userPersistenceInstance.update({
       id: "1",

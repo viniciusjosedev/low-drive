@@ -9,7 +9,7 @@ export default class UserRepositoryImpl implements UserRepository {
   }
 
   public async create(user: User) {
-    const userPersistence =  new UserPersistence(user);
+    const userPersistence =  new UserPersistence({ user });
 
     const userPersistenceOutput = userPersistence.get();
 

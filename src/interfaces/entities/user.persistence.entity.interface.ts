@@ -1,6 +1,14 @@
+import User from "../../entities/user.entity";
 import { UserInput, UserOutput } from "./user.entity.interface";
 
-export interface UserPersistenceInput extends UserInput {
+export interface UserPersistenceInputCreate {
+	id?: string
+	createdAt?: Date;
+  updatedAt?: Date;
+	user: User
+}
+
+export interface UserPersistenceInputUpdate extends UserInput {
 	id?: string
 	createdAt?: Date;
   updatedAt?: Date;

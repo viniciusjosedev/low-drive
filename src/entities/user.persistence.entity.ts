@@ -1,4 +1,4 @@
-import { UserPersistenceInput, UserPersistenceOutput } from "../interfaces/entities/user.persistence.entity.interface";
+import { UserPersistenceInputCreate, UserPersistenceInputUpdate, UserPersistenceOutput } from "../interfaces/entities/user.persistence.entity.interface";
 import User from "./user.entity";
 
 export default class UserPersistence {
@@ -7,24 +7,13 @@ export default class UserPersistence {
   private _updatedAt: Date;
   private _user: User;
 
-  constructor ({
-    id,
-    name,
-    email, 
-    password, 
-    token, 
-    storage,
+  constructor ({ 
+    user,
     createdAt,
-    updatedAt
-  }: UserPersistenceInput) {
-    this._user = new User({
-      name,
-      email,
-      password, 
-      token, 
-      storage
-    });
-
+    updatedAt,
+    id
+  }: UserPersistenceInputCreate) {
+    this._user = user;
     this._id = id;
     this._createdAt = createdAt || new Date();
     this._updatedAt = updatedAt || new Date();
@@ -44,7 +33,7 @@ export default class UserPersistence {
     };
   }
 
-  public update(input: Partial<UserPersistenceInput>): void{
+  public update(input: Partial<UserPersistenceInputUpdate>): void{
     this._user.update(input);
     if (input.id) this._id = input.id;
     if (input.createdAt) this._createdAt = input.createdAt;
