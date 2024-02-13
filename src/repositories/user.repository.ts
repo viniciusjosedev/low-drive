@@ -1,5 +1,6 @@
 import User from "../entities/user.entity";
 import UserPersistence from "../entities/user.persistence.entity";
+import prismaClient from "../frameworks/database/prisma-client";
 import { UserRepository } from "../interfaces/repositories/ user.repository.interface";
 
 export default class UserRepositoryImpl implements UserRepository {
@@ -11,6 +12,12 @@ export default class UserRepositoryImpl implements UserRepository {
     const userPersistence =  new UserPersistence(user);
 
     const userPersistenceOutput = userPersistence.get();
+
+    const createUser = await prismaClient.user.create({
+      data: userPersistenceOutput
+    });
+
+    userPersistence.update(createUser);
 
     return {
       ...userPersistenceOutput,
