@@ -15,7 +15,7 @@ export default class UserRepositoryImpl implements UserRepository {
 
     const createUser = await prismaClient.user.create({
       data: userPersistenceOutput
-    });
+    });		
 
     userPersistence.update(createUser);
 
