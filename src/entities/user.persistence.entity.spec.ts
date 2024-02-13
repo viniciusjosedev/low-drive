@@ -39,5 +39,11 @@ describe("UserPersistenceEntity", () => {
 
   it("should have the right methods", () => {
     expect(userPersistenceInstance.get()).toStrictEqual(mockUserObj);
+
+    userPersistenceInstance.update({
+      id: "1",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
   });
 });
