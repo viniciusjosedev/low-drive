@@ -1,9 +1,10 @@
 import { LowDriveErrorInterface } from "./low-drive-error";
 
 interface MessageError {
-	insufficientStorage: LowDriveErrorInterface,
-	fileNotFound: LowDriveErrorInterface,
-	internalServer: LowDriveErrorInterface,
+	insufficientStorage: LowDriveErrorInterface
+	fileNotFound: LowDriveErrorInterface
+	internalServer: LowDriveErrorInterface
+	userNotFound: LowDriveErrorInterface
 	[x: string]: LowDriveErrorInterface
 }
 
@@ -19,6 +20,10 @@ const messageErrorObj: MessageError = {
   internalServer: {
     message: "Internal server error!",
     statusCode: 500
+  },
+  userNotFound: {
+    message: "User not found!",
+    statusCode: 404
   }
 };
 
