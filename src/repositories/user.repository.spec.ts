@@ -1,6 +1,6 @@
 import User from "../entities/user.entity";
-import prismaClient from "../frameworks/database/prisma-client"; 
 import UserRepositoryImpl from "./user.repository";
+import Database from "../frameworks/databases/database-client";
 
 const mockReturnValue = {
   name: "Vinicius",
@@ -13,27 +13,25 @@ const mockReturnValue = {
   id: "1"
 };
 
-jest.mock("../frameworks/database/prisma-client", () => {
-  return {
-    user: {
-      create: jest.fn(() => (mockReturnValue)),
-    },
-  };
+const mockCreateMethod = jest.fn().mockResolvedValue(mockReturnValue);
+const mockUpdateMethod = jest.fn().mockResolvedValue(mockReturnValue);
+
+jest.mock("../frameworks/databases/database-client", () => {
+  return jest.fn().mockImplementation(() => ({
+    create: mockCreateMethod,
+    update: mockUpdateMethod
+  }));
 });
 
-
 describe("UserRepositoryImpl", () => {
-  let userRepositoryImpl: UserRepositoryImpl;
-	
-  beforeEach(() => {
-    userRepositoryImpl = new UserRepositoryImpl();
-  });
-
   it("should be instantiated", () => {
+    const userRepositoryImpl = new UserRepositoryImpl(new Database());
     expect(userRepositoryImpl).toBeDefined();
   });
 
-  it("should create a users", async () => {
+  it("should create a user", async () => {
+    const userRepositoryImpl = new UserRepositoryImpl(new Database());
+
     const user = new User({
       name: "Vinicius",
       email: "vinicius@vinicorp.com",
@@ -41,11 +39,19 @@ describe("UserRepositoryImpl", () => {
       storage: 0,
       token: "TOKEN",
     });
-		
+    
     await userRepositoryImpl.create(user);
 
-    expect(prismaClient.user.create).toHaveBeenCalled();
-    expect(prismaClient.user.create).toHaveBeenCalledTimes(1);
-    expect(prismaClient.user.create).toHaveReturnedWith(mockReturnValue);
+    expect(mockCreateMethod).toHaveBeenCalled();
+    expect(mockCreateMethod).toHaveBeenCalledTimes(1);
+  });
+
+  it("should update a user", async () => {
+    const userRepositoryImpl = new UserRepositoryImpl(new Database());
+
+    await userRepositoryImpl.update("1", { name: "Test" });
+    
+    expect(mockUpdateMethod).toHaveBeenCalled();
+    expect(mockUpdateMethod).toHaveBeenCalledTimes(1);
   });
 });
