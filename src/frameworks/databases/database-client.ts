@@ -16,8 +16,8 @@ export default class Database implements DatabaseClient {
     return prismaClient.user.findUnique({ where: { id } });
   }
 
-  public async delete(id: string): Promise<boolean> {
-    return await prismaClient.user.delete({ where: { id } }) ? true : false;
+  public async delete(id: string): Promise<UserDatabase | boolean> {
+    return await prismaClient.user.delete({ where: { id } });
   }
 
 }

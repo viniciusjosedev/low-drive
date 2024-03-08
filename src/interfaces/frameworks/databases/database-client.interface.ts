@@ -34,6 +34,6 @@ export interface UpdateUserDatabase {
 export interface DatabaseClient {
   create(input: CreateUserDatabase): Promise<UserDatabase>;
   update(input: UpdateUserDatabase): Promise<UserDatabase>;
-	delete(id: string): Promise<boolean>;
+	delete(id: string): Promise<UserDatabase | boolean>;
 	findById(id: string): Promise<UserDatabase | null>;
 }
