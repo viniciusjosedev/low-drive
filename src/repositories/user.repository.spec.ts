@@ -15,11 +15,13 @@ const mockReturnValue = {
 
 const mockCreateMethod = jest.fn().mockResolvedValue(mockReturnValue);
 const mockUpdateMethod = jest.fn().mockResolvedValue(mockReturnValue);
+const mockDeleteMethod = jest.fn().mockResolvedValue(mockReturnValue);
 
 jest.mock("../frameworks/databases/database-client", () => {
   return jest.fn().mockImplementation(() => ({
     create: mockCreateMethod,
-    update: mockUpdateMethod
+    update: mockUpdateMethod,
+    delete: mockDeleteMethod
   }));
 });
 
@@ -53,5 +55,14 @@ describe("UserRepositoryImpl", () => {
     
     expect(mockUpdateMethod).toHaveBeenCalled();
     expect(mockUpdateMethod).toHaveBeenCalledTimes(1);
+  });
+
+  it("should delete a user", async () => {
+    const userRepositoryImpl = new UserRepositoryImpl(new Database());
+
+    await userRepositoryImpl.delete("uuid");
+
+    expect(mockDeleteMethod).toHaveBeenCalled();
+    expect(mockDeleteMethod).toHaveBeenCalledTimes(1);
   });
 });

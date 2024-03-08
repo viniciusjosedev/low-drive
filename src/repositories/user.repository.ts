@@ -46,9 +46,10 @@ export default class UserRepositoryImpl implements UserRepository {
     };
   }
 
-  // public delete() {
-  //   // implementation goes here
-  // }
+  public async delete(id: string) {
+    const deleteUser = await this._database.delete(id);
+    return Boolean(deleteUser);
+  }
 
   // public async findById(id: string) {
   //   const findUser = await this._database.findById(id);
