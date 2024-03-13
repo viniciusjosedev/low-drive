@@ -51,24 +51,24 @@ export default class UserRepositoryImpl implements UserRepository {
     return Boolean(deleteUser);
   }
 
-  // public async findById(id: string) {
-  //   const findUser = await this._database.findById(id);
+  public async findById(id: string) {
+    const findUser = await this._database.findById(id);
 
-  //   if (!findUser) return null;
+    if (!findUser) return null;
 
-  //   const user = new User(findUser);
+    const user = new User(findUser);
 
-  //   const userPersistence = new UserPersistence({
-  //     user,
-  //     ...findUser
-  //   });
+    const userPersistence = new UserPersistence({
+      user,
+      ...findUser
+    });
 
-  //   const userPersistenceOutput = userPersistence.get();
+    const userPersistenceOutput = userPersistence.get();
 
-  //   return {
-  //     ...userPersistenceOutput,
-  //     mapEntityToDomain: this._mapEntityToDomainFunction(userPersistence)
-  //   };
-  // }
+    return {
+      ...userPersistenceOutput,
+      mapEntityToDomain: this._mapEntityToDomainFunction(userPersistence)
+    };
+  }
 
 }
