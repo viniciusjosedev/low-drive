@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client";
-import { CreateUserDatabase, DatabaseClient, UpdateUserDatabase, UserDatabase } from "../../interfaces/frameworks/databases/database-client.interface";
+import { CreateUserDatabase, DatabaseUserClient, UpdateUserDatabase, UserDatabase } from "../../interfaces/frameworks/databases/database-user-client.interface";
+import prismaClient from "./database";
 
-const prismaClient = new PrismaClient();
-
-export default class Database implements DatabaseClient {
+export default class Database implements DatabaseUserClient {
   public async create(input: CreateUserDatabase): Promise<UserDatabase> {
     return prismaClient.user.create({ data: input });
   }

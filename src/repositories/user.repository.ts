@@ -1,7 +1,7 @@
 import User from "../entities/user.entity";
 import UserPersistence from "../entities/user.persistence.entity";
 import { UserInput } from "../interfaces/entities/user.entity.interface";
-import { DatabaseClient } from "../interfaces/frameworks/databases/database-client.interface";
+import { DatabaseClient } from "../interfaces/frameworks/databases/database-user-client.interface";
 import { UserRepository } from "../interfaces/repositories/ user.repository.interface";
 
 export default class UserRepositoryImpl implements UserRepository {

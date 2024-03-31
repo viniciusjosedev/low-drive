@@ -31,7 +31,7 @@ export interface UpdateUserDatabase {
 	updatedAt?: Date;
 }
 
-export interface DatabaseClient {
+export interface DatabaseUserClient {
   create(input: CreateUserDatabase): Promise<UserDatabase>;
   update(input: UpdateUserDatabase): Promise<UserDatabase>;
 	delete(id: string): Promise<UserDatabase | boolean>;

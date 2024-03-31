@@ -1,6 +1,6 @@
 import User from "../entities/user.entity";
 import UserRepositoryImpl from "./user.repository";
-import Database from "../frameworks/databases/database-client";
+import Database from "../frameworks/databases/database-user-client";
 
 const mockReturnValue = {
   name: "Vinicius",
@@ -18,7 +18,7 @@ const mockUpdateMethod = jest.fn().mockResolvedValue(mockReturnValue);
 const mockDeleteMethod = jest.fn().mockResolvedValue(mockReturnValue);
 let mockFindByIdMethod = jest.fn().mockResolvedValue(mockReturnValue);
 
-jest.mock("../frameworks/databases/database-client", () => {
+jest.mock("../frameworks/databases/database-user-client", () => {
   return jest.fn().mockImplementation(() => ({
     create: mockCreateMethod,
     update: mockUpdateMethod,
