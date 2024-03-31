@@ -16,7 +16,7 @@ const mockReturnValue = {
 const mockCreateMethod = jest.fn().mockResolvedValue(mockReturnValue);
 const mockUpdateMethod = jest.fn().mockResolvedValue(mockReturnValue);
 const mockDeleteMethod = jest.fn().mockResolvedValue(mockReturnValue);
-const mockFindByIdMethod = jest.fn().mockResolvedValue(mockReturnValue);
+let mockFindByIdMethod = jest.fn().mockResolvedValue(mockReturnValue);
 
 jest.mock("../frameworks/databases/database-client", () => {
   return jest.fn().mockImplementation(() => ({
@@ -71,19 +71,24 @@ describe("UserRepositoryImpl", () => {
   it("should find a user", async () => {
     const userRepositoryImpl = new UserRepositoryImpl(new Database());
 
-    await userRepositoryImpl.findById("uuid");
+    const result = await userRepositoryImpl.findById("uuid");		
 
     expect(mockFindByIdMethod).toHaveBeenCalled();
     expect(mockFindByIdMethod).toHaveBeenCalledTimes(1);
+    expect(result).not.toBeNull();
   });
 
   it("should not find a user", async () => {
+    mockFindByIdMethod = jest.fn().mockResolvedValue(null);
     const userRepositoryImpl = new UserRepositoryImpl(new Database());
 
-    await userRepositoryImpl.findById("uuid");
+
+    const result = await userRepositoryImpl.findById("uuid");
+		
 
     expect(mockFindByIdMethod).toHaveBeenCalled();
     expect(mockFindByIdMethod).toHaveBeenCalledTimes(1);
+    expect(result).toBeNull();
   });
 
 });
