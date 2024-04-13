@@ -36,7 +36,7 @@ describe("UserEntity", () => {
       name: "test",
       email: "test@vinicorp.com",
       password: "admin@test",
-      storage: 50,
+      storage: 10,
       token: "ASDF",
     };
 
