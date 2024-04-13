@@ -28,6 +28,7 @@ export default class UserPersistence {
 
     return {
       ...userOutput,
+      id: this._id,
       createdAt: this._createdAt,
       updatedAt: this._updatedAt
     };

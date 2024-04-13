@@ -1,7 +1,7 @@
-import User from "../../entities/user.entity";
-import { UserInput, UserOutput } from "../entities/user.entity.interface";
-import { UserPersistenceOutput } from "../entities/user.persistence.entity.interface";
-import { mapEntityToDomain } from "./map-entity-to-domain.interface";
+import User from "../../../entities/user.entity";
+import { UserInput, UserOutput } from "../../entities/user.entity.interface";
+import { UserPersistenceOutput } from "../../entities/user.persistence.entity.interface";
+import { mapEntityToDomain } from "../map-entity-to-domain.interface";
 
 type OutputAndMap = UserPersistenceOutput & mapEntityToDomain<UserOutput>
 
