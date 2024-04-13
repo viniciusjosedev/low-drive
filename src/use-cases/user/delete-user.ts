@@ -1,4 +1,4 @@
-import UserRepositoryImpl from "../repositories/user.repository";
+import UserRepositoryImpl from "../../repositories/user/user.repository";
 
 export default class DeleteUserCase {
   private _repository: UserRepositoryImpl;

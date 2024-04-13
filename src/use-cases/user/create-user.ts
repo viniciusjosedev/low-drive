@@ -1,7 +1,7 @@
-import User from "../entities/user.entity";
-import { UserInput } from "../interfaces/entities/user.entity.interface";
-import UserRepositoryImpl from "../repositories/user.repository";
-import { UserPersistenceOutput } from "../interfaces/entities/user.persistence.entity.interface";
+import User from "../../entities/user.entity";
+import { UserInput } from "../../interfaces/entities/user.entity.interface";
+import UserRepositoryImpl from "../../repositories/user/user.repository";
+import { UserPersistenceOutput } from "../../interfaces/entities/user.persistence.entity.interface";
 
 export default class CreateUserUseCase {
   private _repository: UserRepositoryImpl;
