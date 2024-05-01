@@ -14,9 +14,7 @@ const mockUserObj = {
   token: "TOKEN",
 };
 
-
-
-describe("UserEntity", () => {
+describe("FileEntity", () => {
   let filesInstance: File;
   let mockFileObj: {
 		user: User,

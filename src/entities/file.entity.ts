@@ -19,7 +19,7 @@ export default class File {
     return this._user;
   }
 
-  private findFileByName(name: string) {
+  protected findFileByName(name: string) {
     let fileIndex: number | undefined;
 
     const findFile = this._files.find((file, index) => {
@@ -67,28 +67,50 @@ export default class File {
     };
   }
 
-  public create(file: Ifile) {
-    const { haveSize, newSize } = this.isPossibleAddFile(file.size);
+  public create({
+    mimeType,
+    name,
+    size,
+    type
+  }: Ifile) {
+    const { haveSize, newSize } = this.isPossibleAddFile(size);
 
     if (!haveSize) {
       throw new LowDriveError(messagesError.insufficientStorage);
     }
 
-    this._files.push(file);
+    this._files.push({
+      mimeType,
+      name,
+      size,
+      type
+    });
+
     this._user.update({
       storage: newSize
     });
   }
 
-  public update(file: Ifile) {
-    const { haveSize, newSize, fileIndex } = this.isPossibleAttFile(file.name, file.size);
+  public update({
+    mimeType,
+    name,
+    size,
+    type
+  }: Ifile) {
+    const { haveSize, newSize, fileIndex } = this.isPossibleAttFile(name, size);
 	
     if (!haveSize){
       throw new LowDriveError(messagesError.insufficientStorage);
     }
 		
     if (typeof fileIndex === "number") {
-      this._files[fileIndex].size = newSize;
+      this._files[fileIndex] = {
+        mimeType,
+        name,
+        size,
+        type
+      };
+
       this._user.update({
         storage: newSize
       });
