@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --no-cache",
     "dev": "ts-node-dev --respawn --transpile-only ./src/frameworks/web/server.ts"
   },
   "keywords": [],
