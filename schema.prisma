@@ -29,6 +29,6 @@ model File {
   type     String
   size     Int
   userId   String
-  User     User?  @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  User     User  @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 	createdAt DateTime @default(now())
 }
