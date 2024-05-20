@@ -1,20 +1,25 @@
 import { FilePersistenceInputCreate, FilePersistenceOutput, IfileExtends } from "../interfaces/entities/file.persistence.entity.interface";
 import File from "./file.entity";
+import UserPersistence from "./user.persistence.entity";
 
 export default class FilePersistence extends File {
   private _fileExtends: IfileExtends[];
+  private _userPersistence: UserPersistence;
 
   constructor ({ 
     files,
-    user,
+    user: userPersistence,
   }: FilePersistenceInputCreate) {
+    const user = userPersistence.user;
     super({ files, user });
     this._fileExtends = [];
+    this._userPersistence = userPersistence;
     files.map((file) => {
       this._fileExtends.push({
         ...file,
         createdAt: file.createdAt || new Date(),
-        id: file.id
+        id: file.id,
+        userId: file.userId
       });
     });
   }
@@ -33,15 +38,20 @@ export default class FilePersistence extends File {
     this._fileExtends = this._fileExtends.filter(({ name: nameExtend }) => nameExtend !== name);
   }
 
-  public get(): FilePersistenceOutput {
-    const user = super.user;
-
+  public get() {
     return {
-      files: this._fileExtends,
-      user
+      files: super.files,
+      user: super.user
     };
   }
 	
+  public getPersistence(): FilePersistenceOutput {
+    return {
+      files: this._fileExtends,
+      user: this._userPersistence
+    };
+  }
+
   public create(fileExtends: IfileExtends) {
     super.create(fileExtends);
 

@@ -1,21 +1,18 @@
-import User from "../../entities/user.entity";
+import UserPersistence from "../../entities/user.persistence.entity";
 import { Ifile } from "./file.entity.interface";
 
 export interface IfileExtends extends Ifile {
 	id?: string;
 	createdAt?: Date;
+	userId: string
 }
 
 export interface FilePersistenceInputCreate {
 	files: IfileExtends[]
-	user: User
+	user: UserPersistence
 }
 
 export interface FilePersistenceOutput {
 	files: IfileExtends[]
-	user: User
-}
-
-export interface FilePersistenceUpdate {
-	
+	user: UserPersistence
 }
