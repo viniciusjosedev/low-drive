@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { BodyCreate } from "../../interfaces/web/user-controller-interface";
+import { BodyCreate } from "../../interfaces/web/controllers/user-controller-interface";
 import UserService from "../services/user-service";
 import LowDriveWebError from "../../errors/web/low-drive-web-error";
 import messageErrorObj from "../../errors/web/messages-web-error";

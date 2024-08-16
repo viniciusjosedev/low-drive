@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Sign } from "../../interfaces/web/authentication";
+import { Sign } from "../../interfaces/web/authentication/authentication";
 
 class Authentication {
   public static sign(data: Sign) {

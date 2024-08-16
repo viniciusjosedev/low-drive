@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import {
   DoneFastify,
   OptionsFastifyRoutes
-} from "../../interfaces/web/fastify-helpers";
+} from "../../interfaces/web/helpers/fastify-helpers";
 import UserController from "../controllers/user-controller";
 import joi from "joi";
 

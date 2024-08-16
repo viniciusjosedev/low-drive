@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import {
   BodyCreate,
   BodyLogin
-} from "../../interfaces/web/user-controller-interface";
+} from "../../interfaces/web/controllers/user-controller-interface";
 import UserService from "../services/user-service";
 import LowDriveWebError from "../../errors/web/low-drive-web-error";
 import messageErrorObj from "../../errors/web/messages-web-error";

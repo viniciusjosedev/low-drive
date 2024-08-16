@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import {
   DoneFastify,
   OptionsFastifyRoutes
-} from "../../interfaces/web/fastify-helpers";
+} from "../../interfaces/web/helpers/fastify-helpers";
 import AuthController from "../controllers/auth-controller";
 import { authLogin, authRegister } from "../validations";
 import validatorCompiler from "../helpers/validator-compiler";

@@ -3,7 +3,7 @@ import UserRoute from "./user-routes";
 import {
   DoneFastify,
   OptionsFastifyRoutes
-} from "../../interfaces/web/fastify-helpers";
+} from "../../interfaces/web/helpers/fastify-helpers";
 import AuthRoute from "./auth-router";
 
 class Routes {
