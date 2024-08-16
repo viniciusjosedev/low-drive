@@ -6,3 +6,10 @@ dist
 
 # coverage's
 coverage
+
+# public
+public
+
+# ENV
+.env
+
