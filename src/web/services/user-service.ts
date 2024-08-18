@@ -1,5 +1,5 @@
 import db from "../../databases";
-import { UserCreate } from "../../interfaces/web/user-service-interface";
+import { UserCreate } from "../../interfaces/web/services/user-service-interface";
 
 class UserService {
   public async getByEmail(email: string) {

@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import {
-  BodyCreate,
-  BodyLogin
-} from "../../interfaces/web/controllers/user-controller-interface";
+  BodyAuthCreate,
+  BodyAuthLogin
+} from "../../interfaces/web/controllers/auth-controller-interface";
 import UserService from "../services/user-service";
 import LowDriveWebError from "../../errors/web/low-drive-web-error";
 import messageErrorObj from "../../errors/web/messages-web-error";
@@ -11,7 +11,7 @@ import { encodingPassword, verifyPassword } from "../crypto";
 
 class AuthController {
   public static async login(req: FastifyRequest, res: FastifyReply) {
-    const { email, password } = req.body as BodyLogin;
+    const { email, password } = req.body as BodyAuthLogin;
 
     const service = new UserService();
 
@@ -35,7 +35,7 @@ class AuthController {
   }
 
   public static async register(req: FastifyRequest, res: FastifyReply) {
-    const { email, name, password } = req.body as BodyCreate;
+    const { email, name, password } = req.body as BodyAuthCreate;
 
     const service = new UserService();
 
