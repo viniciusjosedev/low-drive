@@ -4,7 +4,8 @@ import {
   OptionsFastifyRoutes
 } from "../../interfaces/web/helpers/fastify-helpers";
 import UserController from "../controllers/user-controller";
-import joi from "joi";
+import isAuth from "../middleware/isAuth";
+import validatorCompiler from "../helpers/validator-compiler";
 
 const UserRoute = (
   fastify: FastifyInstance,
@@ -14,35 +15,10 @@ const UserRoute = (
   fastify.get(
     "/user/:id",
     {
-      schema: {
-        params: {
-          type: "object",
-          properties: {
-            par1: { type: "number" }
-          }
-        }
-      }
+      validatorCompiler,
+      preHandler: isAuth
     },
-    UserController.index
-  );
-  fastify.post(
-    "/user",
-    {
-      schema: {
-        body: joi
-          .object()
-          .keys({
-            name: joi.string().required(),
-            email: joi.string().email().required(),
-            password: joi.string().min(4).required()
-          })
-          .required()
-      },
-      validatorCompiler: ({ schema }) => {
-        return (data) => (schema as joi.ObjectSchema).validate(data);
-      }
-    },
-    UserController.create
+    UserController.show
   );
 
   done();

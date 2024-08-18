@@ -1,32 +1,27 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { BodyCreate } from "../../interfaces/web/controllers/user-controller-interface";
 import UserService from "../services/user-service";
 import LowDriveWebError from "../../errors/web/low-drive-web-error";
 import messageErrorObj from "../../errors/web/messages-web-error";
 
 class UserController {
-  public static async index(_req: FastifyRequest, res: FastifyReply) {
-    const { id } = _req.params;
-
-    console.log(id);
-
-    return res.send();
-  }
-
-  public static async create(req: FastifyRequest, res: FastifyReply) {
-    const { email, name, password } = req.body as BodyCreate;
+  public static async show(req: FastifyRequest, reply: FastifyReply) {
+    const { email } = req.user;
 
     const service = new UserService();
 
-    const hasUserWithThisEmail = await service.getByEmail(email);
+    const user = await service.getByEmail(email);
 
-    if (hasUserWithThisEmail) {
-      throw new LowDriveWebError(messageErrorObj.thisUserAlreadyExist);
+    if (!user) {
+      throw new LowDriveWebError(messageErrorObj.userNotFound);
     }
 
-    await service.create({ email, name, password });
-
-    return res.status(201).send();
+    return reply.status(200).send({
+      name: user.name,
+      email: user.email,
+      storage: user.storage,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    });
   }
 }
 
