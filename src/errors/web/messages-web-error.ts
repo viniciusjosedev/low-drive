@@ -28,6 +28,11 @@ const messageErrorObj = {
     message: "This user already exists",
     statusCode: 409,
     code: "USER_ALREADY_EXISTS_ERR"
+  },
+  unauthorized: {
+    message: "Token invalid or expired",
+    statusCode: 401,
+    code: "UNAUTHORIZED"
   }
 };
 
