@@ -1,0 +1,42 @@
+  version: '3.8'
+
+  networks:
+    low-drive-networking:
+      driver: bridge
+
+  volumes:
+    db_data:
+
+  services:
+    low-drive-db:
+      image: postgres:16
+      container_name: low-drive-db
+      networks:
+        - low-drive-networking
+      environment:
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+      volumes:
+        - db_data:/var/lib/postgresql/data
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        start_period: 10s
+      restart: on-failure
+      ports:
+        - 5435:5432
+
+    low-drive-app:
+      build:
+        context: .
+        dockerfile: Dockerfile
+        target: prod
+      container_name: low-drive-app
+      networks:
+        - low-drive-networking
+      depends_on:
+        low-drive-db:
+          condition: service_healthy
+      volumes:
+        - .:/app
+      
+
+
