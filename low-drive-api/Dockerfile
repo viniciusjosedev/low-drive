@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 # Stage 2: Development stage
-FROM node:20-alpine3.16 AS development
+FROM node:20-alpine3.16 AS dev
 
 WORKDIR /app
 

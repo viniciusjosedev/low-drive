@@ -8,7 +8,7 @@
 		"migrate": "npx prisma migrate dev",
 		"logs": "docker logs -f low-drive-app",
     "dev": "npm run migrate && ts-node-dev --respawn --transpile-only ./src/web/server.ts",
-		"up": "docker compose up -d && npm run logs",
+		"up": "docker compose up -d --build --force-recreate && npm run logs",
 		"down": "docker compose down"
   },
   "keywords": [],

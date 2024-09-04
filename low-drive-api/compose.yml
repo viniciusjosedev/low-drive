@@ -1,4 +1,4 @@
-  version: '3.8'
+  version: '3.4'
 
   networks:
     low-drive-networking:
@@ -28,7 +28,7 @@
       build:
         context: .
         dockerfile: Dockerfile
-        target: prod
+        target: ${NODE_ENV}
       container_name: low-drive-app
       networks:
         - low-drive-networking
