@@ -29,8 +29,6 @@ class Main {
   ): Promise<FastifyInstance | void> {
     const app = fastify();
 
-    // app.setValidatorCompiler((opt) => ajv.compile(opt));
-
     app.register(cors, {
       origin: "*"
     });
