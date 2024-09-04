@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/web/server.ts"
+		"migrate": "npx prisma migrate dev",
+		"logs": "docker logs -f low-drive-app",
+    "dev": "npm run migrate && ts-node-dev --respawn --transpile-only ./src/web/server.ts",
+		"up": "docker compose up -d && npm run logs",
+		"down": "docker compose down"
   },
   "keywords": [],
   "author": "",
