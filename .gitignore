@@ -3,6 +3,7 @@ node_modules
 
 # build's
 dist
+build
 
 # coverage's
 coverage
