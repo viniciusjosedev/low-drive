@@ -1,4 +1,4 @@
-  version: '3.4'
+  version: '3.8'
 
   networks:
     low-drive-networking:
@@ -22,7 +22,7 @@
         start_period: 10s
       restart: on-failure
       ports:
-        - 5435:5432
+        - ${DB_PORT}:5432
 
     low-drive-app:
       build:
