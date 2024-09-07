@@ -7,7 +7,7 @@ import AuthController from "../controllers/auth-controller";
 import { authLogin, authRegister } from "../validations";
 import validatorCompiler from "../helpers/validator-compiler";
 
-const AuthRoute = (
+const AuthRouter = (
   fastify: FastifyInstance,
   _opts: OptionsFastifyRoutes,
   done: DoneFastify
@@ -36,4 +36,4 @@ const AuthRoute = (
   done();
 };
 
-export default AuthRoute;
+export default AuthRouter;
