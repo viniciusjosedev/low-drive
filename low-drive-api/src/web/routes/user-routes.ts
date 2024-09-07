@@ -7,7 +7,7 @@ import UserController from "../controllers/user-controller";
 import isAuth from "../middleware/isAuth";
 import validatorCompiler from "../helpers/validator-compiler";
 
-const UserRoute = (
+const UserRouter = (
   fastify: FastifyInstance,
   _opts: OptionsFastifyRoutes,
   done: DoneFastify
@@ -24,4 +24,4 @@ const UserRoute = (
   done();
 };
 
-export default UserRoute;
+export default UserRouter;
