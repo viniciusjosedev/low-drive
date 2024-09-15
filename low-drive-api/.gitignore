@@ -10,6 +10,7 @@ coverage
 
 # public
 public
+temp
 
 # ENV
 .env
